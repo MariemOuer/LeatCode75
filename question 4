@@ -1,0 +1,35 @@
+
+class Solution {
+    public List<List<String>> groupAnagrams(String[] strs) {
+        // Create a map to hold the sorted string as the key and list of anagrams as the value
+        HashMap<String, List<String>> map = new HashMap<>();
+
+        // Iterate over each string in the array
+        for (int i = 0; i < strs.length; i++) {
+            // Convert string to a character array
+            char[] a = strs[i].toCharArray();
+            // Sort the character array
+            Arrays.sort(a);
+            // Convert sorted character array back to string
+            String sortedStr = new String(a);
+
+            // Add to hashmap
+            if (!map.containsKey(sortedStr)) {
+                // Put a new list for the key
+                map.put(sortedStr, new ArrayList<>());
+            }
+            // Add the original string to the list of the sorted key
+            map.get(sortedStr).add(strs[i]);
+        }
+
+        // Create a list to hold all the grouped anagrams
+        List<List<String>> groupedAnagrams = new ArrayList<>();
+        // Iterate through the values in the map
+        for (List<String> anagramGroup : map.values()) {
+            groupedAnagrams.add(anagramGroup);
+        }
+
+        // Return the list of grouped anagrams
+        return groupedAnagrams;
+    }
+}
